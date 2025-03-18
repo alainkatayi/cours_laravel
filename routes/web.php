@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Grouper des route s'ils ont un meme prefixe apr exemple
+//Grouper des route s'ils ont un meme prefixe par exemple
 //on definis le preixe blog, ce qui veut dire = que chaque riute qui se trouve dans ce groupe commencera par blog, donc pas besoin de definir encore le (/blog) pour ces routes
 Route::prefix('/blog')->name('blog.') ->group(function(){
     Route::get('/' , [\App\Http\Controllers\PublicationController::class, 'index']
@@ -65,6 +65,12 @@ Route::prefix('/blog')->name('blog.') ->group(function(){
             //"link" => \route('blog.index', ['slug' => 'article', 'id' => 13])
         //];
     ) ->name('index');
+
+    Route::get('/new', [\App\Http\Controllers\PublicationController::class,'new']);
+    Route::post('/new', [\App\Http\Controllers\PublicationController::class, 'store']);
+    Route::get('/{post}/edit', [\App\Http\Controllers\PublicationController::class, 'edit']);
+    Route::post('/{post}/edit', [\App\Http\Controllers\PublicationController::class, 'update']);
+
     
     Route::get('/{slug}-{id}', [\App\Http\Controllers\PublicationController::class, 'show']
 
