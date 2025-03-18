@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Post;
 use App\Http\Requests\CreatePublicationRequest;
+use App\Models\Category;
+use App\Models\Publication;
 
 class PublicationController extends Controller
 {
@@ -22,9 +24,11 @@ class PublicationController extends Controller
     {
 
         //$post = ;
-        return view('blog.index',[
-            'posts' => \App\Models\Publication::paginate(1)
-        ]); 
+        $post = Publication::find(2);
+        dd($post ->category ->name);        //dd($post->category->name);
+        return view('blog.index', [
+            'posts' => Publication::paginate(1)
+        ]);
         
     }
 
